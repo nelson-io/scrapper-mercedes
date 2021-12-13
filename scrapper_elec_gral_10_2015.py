@@ -31,8 +31,9 @@ error_mesa = []
 
 path = 'https://www.padron.gob.ar/publica/'
     
+elecc = 'ELECCIONES GENERALES 25/10/2015'
 
-for i in range(10):
+for i in range(200):
 
 
 
@@ -52,9 +53,9 @@ for i in range(10):
         
         
         elem_distelectoral.send_keys('BUENOS AIRES')
-        
-        #elem_eleccion = driver.find_element_by_id('elec')
-        #elem_eleccion.send_keys('ELECCIONES GENERALES 14/11/2021')
+        time.sleep(1)
+        elem_eleccion = driver.find_element_by_id('elec')
+        elem_eleccion.send_keys(elecc)
         
         time.sleep(1)
         elem_secelec = driver.find_element_by_id('secm')
@@ -81,8 +82,8 @@ for i in range(10):
         df_meta['mesa'] = i + 1
         df_data['mesa'] = i + 1
         
-        df_meta['eleciones'] = 'ELECCIONES GENERALES 14/11/2021'
-        df_data['eleciones'] = 'ELECCIONES GENERALES 14/11/2021'
+        df_meta['eleciones'] = elecc
+        df_data['eleciones'] = elecc
         
         df_meta['circuito'] = circuito
         df_data['circuito'] = circuito
@@ -99,5 +100,9 @@ for i in range(10):
         time.sleep(3)
         
         
-    
+df_data_full = pd.concat(df_list)
+df_meta_full = pd.concat(df_meta_list) 
+
+df_data_full.to_csv('out\\elec_gral_10_2015_data.csv')  
+df_meta_full.to_csv('out\\elec_gral_10_2015_meta.csv')   
     
